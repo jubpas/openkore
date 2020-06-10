@@ -4077,3 +4077,13 @@ moc_fild17 369 272 moc_fild16 19 179
 prt_castle 45 145 prt_castle 72 153
 prt_castle 68 153 prt_castle 42 145
 moc_fild17 369 272 moc_fild16 19 179
+prt_fild08e 371 212 izlude_e 20 98
+izlude_e 20 98 prt_fild08e 363 212
+iz_int04 47 30 iz_int04 27 30
+iz_int04 27 30 iz_int04 51 30
+iz_int06 47 30 iz_int06 27 30
+iz_int06 27 30 iz_int06 51 30
+prt_fild08f 371 212 izlude_f 20 98
+izlude_f 20 98 prt_fild08f 363 213
+moc_fild02 332 19 moc_fild03 70 341
+moc_fild03 70 341 moc_fild02 332 23
