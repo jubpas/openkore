@@ -24,6 +24,7 @@ To run OpenKore you will need:
 ## Update For TRO( Ragnarok Gravity Thailand 2020)
 
 ** ใช้งานได้ในโหมด xKore 1 เท่านั้น
+- Require Bypass EAC
 
 ## Sponsor
 
