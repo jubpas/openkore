@@ -20,6 +20,7 @@ sub new {
 	my $self = $class->SUPER::new(@_);
 
 	my %packets = (
+		'0B60' => ['account_server_info', 'v a4 a4 a4 a4 a26 C a*', [qw(len sessionID accountID sessionID2 lastLoginIP lastLoginTime accountSex serverInfo)]], #11/06/2020
 		'0097' => ['private_message', 'v Z24 V Z*', [qw(len privMsgUser flag privMsg)]], # -1
 		'009D' => ['item_exists', 'a4 v2 C v2 C2 v', [qw(ID nameID type identified x y subx suby amount)]],
 		'01C8' => ['item_used', 'a2 V a4 v C', [qw(ID itemID actorID remaining success)]],
