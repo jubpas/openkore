@@ -24,6 +24,7 @@ charDeleteDateType 1
 blockingPlayerCancel 1
 rankingSystemType 1
 itemListType 1
+pauseCharLogin 1
 
 # http://ro.gnjoy.in.th/
 [Thailand - tRO: Junon]
@@ -40,6 +41,7 @@ charDeleteDateType 1
 blockingPlayerCancel 1
 rankingSystemType 1
 itemListType 1
+pauseCharLogin 1
 
 # http://ro.gnjoy.in.th/
 [Thailand - tRO: Yuno]
@@ -56,3 +58,4 @@ charDeleteDateType 1
 blockingPlayerCancel 1
 rankingSystemType 1
 itemListType 1
+pauseCharLogin 1

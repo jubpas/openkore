@@ -60,3 +60,405 @@
 1085 Red Mushroom
 1085 Red Mushroom
 1119 Frilldora
+1558 Sandman
+1558 Sandman
+1159 Phreeoni
+1159 Phreeoni
+1214 Choco
+1106 Desert Wolf
+1057 Yoyo
+1132 Khalitzburg
+1219 Abysmal Knight
+1836 Magmaring
+1837 Imp
+1243 Sasquatch
+1866 Hellhound
+1920 Incarnation of Morocc
+1368 Geographer
+1139 Mantis
+1114 Dustiness
+1139 Mantis
+1114 Dustiness
+1368 Geographer
+1180 Nine Tail
+1920 Incarnation of Morocc
+1083 Shining Plant
+1083 Shining Plant
+1632 Gremlin
+1164 Requiem
+1780 Muscipular
+1213 High Orc
+1618 Ungoliant
+1417 Zipper Bear
+1409 Dumpling Child
+1625 Porcellio
+1178 Zerom
+1065 Strouf
+1260 Dark Frame
+1668 Archdam
+1139 Mantis
+1128 Horn
+1031 Poporing
+1033 Elder Willow
+1919 Incarnation of Morocc
+1163 Raydric
+1753 Frus
+1761 Skogul
+1208 Wanderer
+1774 Seeker
+1163 Raydric
+1509 Lude
+1135 Kobold
+1208 Wanderer
+1774 Seeker
+1135 Kobold
+1831 Salamander
+1831 Salamander
+1753 Frus
+1079 Blue Plant
+1079 Blue Plant
+1761 Skogul
+1761 Skogul
+1753 Frus
+1005 Familiar
+1041 Mummy
+1016 Archer Skeleton
+1028 Soldier Skeleton
+1029 Isis
+1032 Verit
+1146 Matyr
+1023 Orc Warrior
+1153 Orc Zombie
+1084 Black Mushroom
+1152 Orc Skeleton
+1082 White Plant
+1020 Mandragora
+1657 Laurell Weinder
+1149 Minorous
+1310 Majoruros
+1109 Deviruchi
+1872 Hell Fly
+1921 Incarnation of Morocc
+1302 Dark Illusion
+1054 Male Thief Bug
+1202 Phen Dark
+1671 Dimik
+1203 Mysteltainn
+1273 Orc Lady
+1390 Violy
+1720 Hydrolancer
+1205 Executioner
+1758 Ferus
+1757 Acidus
+1179 Whisper
+1769 Agav
+1319 Freezer
+1200 Zealotus
+1133 Kobold
+1369 Grand Peco
+1386 Sleeper
+1369 Grand Peco
+1386 Sleeper
+1764 Skeggiold
+1755 Skeggiold
+1703 Lady Solace
+1737 Aliza
+1681 Gemini-S58
+1257 Injustice
+1771 Vanberk
+1763 Skeggiold
+1693 Plasma
+1189 Orc Archer
+1177 Zenorc
+1292 Mini Demon
+1678 Venatu
+1833 Kasa
+1194 Arclouze
+1686 Orc Baby
+1773 Hodremlin
+1918 Incarnation of Morocc
+1196 Skel Prisoner
+1174 Stainer
+1555 Alka-Seltzer
+1118 Flora
+1156 Petite
+1105 Deniro
+1026 Munak
+1263 Wind Ghost
+1071 Pirate Skeleton
+1776 Siroma
+1145 Martin
+1073 Crab
+1500 Parasite
+1392 Rotar Zairo
+1129 Horong
+1713 Acidus
+1614 Mineral
+1633 Beholder
+1259 Gryphon
+1143 Marionette
+1829 Sword Guardian
+1789 Iceicle
+1677 Venatu
+1103 Caramel
+1160 Piere
+1104 Coco
+1215 Stem Worm
+1304 Giant Spider
+1416 Evil Nymph
+1295 Owl Baron
+1829 Sword Guardian
+1677 Venatu
+1259 Gryphon
+1633 Beholder
+1713 Acidus
+1867 Banshee
+1867 Banshee
+1365 Apocalypse
+1154 Pasana
+1256 Pest
+1653 Wickebine Tres
+1794 Roween
+1155 Petite
+1037 Side Winder
+1124 Goblin
+1253 Gargoyle
+1117 Evil Druid
+1192 Wraith
+1254 Raggler
+1781 Drosera
+1784 Stapo
+1784 Stapo
+1781 Drosera
+1783 Galion
+1783 Galion
+2411 Lv 150
+2411 Lv 150
+2411 Lv 150
+1162 Rafflesia
+1613 Metaling
+1162 Rafflesia
+1613 Metaling
+1162 Rafflesia
+1613 Metaling
+1282 Kobold Archer
+1282 Kobold Archer
+1134 Kobold
+1282 Kobold Archer
+1134 Kobold
+1134 Kobold
+1692 Breeze
+1692 Breeze
+1378 Demon Pungus
+1378 Demon Pungus
+1378 Demon Pungus
+1692 Breeze
+1296 Kobold Leader
+1592 A Gangster
+1592 A Gangster
+1592 A Gangster
+1785 Atroce
+1791 Galion
+1791 Galion
+1616 Pitman
+1619 Porcellio
+1620 Noxious
+1622 Teddy Bear
+1617 Waste Stove
+1621 Venomous
+2308 ZLNIs
+2308 ZLNIs
+1255 Neraid
+1175 Tarou
+1277 Greatest General
+1056 Smokie
+1682 Remover
+1694 Plasma
+1276 Raydric Archer
+1265 Cookie
+1517 Jing Guai
+1255 Neraid
+1738 Constant
+1499 Wootan Fighter
+1070 Kukre
+1838 Knocker
+1306 Leib Olmai
+1098 Anubis
+1405 Tengu
+1076 Skeleton
+1404 Miyabi Doll
+1138 Magnolia
+1266 Aster
+1628 Holden
+1098 Anubis
+1379 Nightmare Terror
+1595 Marin
+1508 Quve
+1066 Vadon
+1277 Greatest General
+1777 Ice Titan
+1308 Panzer Goblin
+1582 Deviling
+1433 Deviruchi
+1382 Diabolic
+1508 Quve
+1382 Diabolic
+1682 Remover
+1142 Marine Sphere
+1376 Harpy
+1387 Gig
+1308 Panzer Goblin
+1070 Kukre
+1322 Spring Rabbit
+1274 Megalith
+1880 Wood Goblin
+1405 Tengu
+1595 Marin
+1615 Obsidian
+1669 Dimik
+1510 Heirozoist
+1670 Dimik
+1880 Wood Goblin
+1669 Dimik
+1507 Bloody Murderer
+1274 Megalith
+1670 Dimik
+1123 Goblin
+1507 Bloody Murderer
+1772 Isilla
+1738 Constant
+1582 Deviling
+1736 Aliot
+1777 Ice Titan
+1838 Knocker
+1628 Holden
+1736 Aliot
+1495 Stone Shooter
+1433 Deviruchi
+1772 Isilla
+1290 Skeleton General
+1290 Skeleton General
+1291 Wraith Dead
+1383 Explosion
+1699 Ancient Mimic
+1123 Goblin
+1679 Venatu
+1406 Kapha
+1412 Taoist Hermit
+1717 Ferus
+1493 Dryad
+1412 Taoist Hermit
+1679 Venatu
+1383 Explosion
+1504 Dullahan
+1504 Dullahan
+1493 Dryad
+1717 Ferus
+1201 Rybio
+1197 Zombie Prisoner
+1201 Rybio
+1035 Hunter Fly
+1197 Zombie Prisoner
+1035 Hunter Fly
+1864 Zombie Slaughter
+1268 Bloody Knight
+1249 Myst Case
+1060 Bigfoot
+1110 Dokebi
+1301 Am Mut#Monster
+1754 Skeggiold
+1058 Metaller
+1176 Vitata
+1704 Odium of Thanatos
+1121 Giearth
+1140 Marduk
+1204 Ogretooth
+703 Talkative Kid
+1494 Beetle King
+1166 Savage
+1603 Bigfoot
+1706 Maero of Thanatos
+706 Talkative Kid
+1267 Carat
+1715 Novus
+1158 Phen
+1314 Permeter
+1267 Carat
+1320 Owl Duke
+1320 Owl Duke
+1309 Gajomart
+1725 Poring
+1374 Incubus
+1182 Mushroom
+1182 Mushroom
+1865 Ragged Zombie
+1705 Despero of Thanatos
+1015 Zombie
+1116 Eggyra
+1115 Eddga
+1115 Eddga
+1687 Grove
+1687 Grove
+1271 Alligator
+1271 Alligator
+1262 Mutant Dragonoid
+1262 Mutant Dragonoid
+1125 Goblin
+1122 Goblin
+1299 Goblin Leader
+1126 Goblin
+1380 Driller
+1099 Argiope
+1099 Argiope
+1380 Driller
+2408 Lv 10
+738 Adventurer's Pet
+2413 Lv 10 (Fire)
+1654 Armeyer Dinze
+1258 Goblin Archer
+1280 Goblin Steamrider
+1372 Goat
+1367 Blazzer
+1072 Kaho
+1141 Marina
+1068 Hydra
+1161 Plankton
+1161 Plankton
+1141 Marina
+1068 Hydra
+1067 Cornutus
+1144 Marse
+1069 Sword Fish
+1067 Cornutus
+1045 Marc
+1045 Marc
+1069 Sword Fish
+1264 Merman
+1264 Merman
+1108 Deviace
+1108 Deviace
+1652 Egnigem Cenia
+1198 Dark Priest
+1198 Dark Priest
+1275 Alice
+2792 Furious Injustice
+1281 Sageworm
+1281 Sageworm
+2077 Shadow of Illusion
+2077 Shadow of Illusion
+1775 Snowier
+1775 Snowier
+1778 Gazeti
+1778 Gazeti
+1366 Lava Golem
+1366 Lava Golem
+1381 Grizzly
+1385 Deleter
+1384 Deleter
+1384 Deleter
+1385 Deleter
+1381 Grizzly
+1120 Ghostring
+1599 Giant Whisper
+1599 Giant Whisper
+1120 Ghostring
