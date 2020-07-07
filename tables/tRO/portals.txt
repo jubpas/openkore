@@ -19,6 +19,28 @@ ayothaya 152 68 alberta 247 42 0 c r0 n
 ama_in02 115 177 ama_dun01 229 10 0 c r1 c r0 n
 ama_dun01 229 7 ama_in02 119 181 0 c r0 n
 
+#Add Warp Chanel GGT
+gl_church 160 14 gl_ch_a 157 12 0 c r1 n
+gl_church 160 14 gl_ch_b 157 12 0 c r2 n
+gl_ch_a 160 14 gl_church 157 12 0 c r0 n
+gl_ch_a 160 14 gl_ch_b 157 12 0 c r2 n
+gl_ch_b 160 14 gl_church 157 12 0 c r0 n
+gl_ch_b 160 14 gl_ch_a 157 12 0 c r1 n
+
+ve_fild07 297 139 ve_fild07_a 299 139 0 c r1 n
+ve_fild07 297 139 ve_fild07_b 299 139 0 c r2 n
+ve_fild07_a 297 139 ve_fild07 299 139 0 c r0 n
+ve_fild07_a 297 139 ve_fild07_b 299 139 0 c r2 n
+ve_fild07_b 148 177 ve_fild07 299 139 0 c r0 n
+ve_fild07_b 148 177 ve_fild07_a 299 139 0 c r1 n
+
+ve_fild03 348 225 ve_fild03_a 346 223 0 c r1 n
+ve_fild03 348 225 ve_fild03_b 346 223 0 c r2 n
+ve_fild03_a 348 225 ve_fild03 346 223 0 c r0 n
+ve_fild03_a 348 225 ve_fild03_b 346 223 0 c r2 n
+ve_fild03_b 348 225 ve_fild03 346 223 0 c r0 n
+ve_fild03_b 348 225 ve_fild03_a 346 223 0 c r1 n
+
 # VIP Warps
 #yuno 142 183 prontera 116 72 1800 c c c c c r0
 #yuno 142 183 izlude 94 103 1800 c c c c c r1
