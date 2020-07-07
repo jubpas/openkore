@@ -28,7 +28,7 @@ EFST_MAXIMIZE Maximize Power
 EFST_RIDING Riding Vehicle
 EFST_FALCON Falconry Mastery
 EFST_TRICKDEAD Play Dead
-EFST_SHOUT Crazy Uproar
+EFST_SHOUT Shout
 EFST_ENERGYCOAT Energy Coat
 EFST_BROKENARMOR Broken Armor
 EFST_BROKENWEAPON Broken Weapon
@@ -82,7 +82,7 @@ EFST_TENSIONRELAX Relax
 EFST_ASSUMPTIO Assumptio
 EFST_GROUNDMAGIC Apply the ground magic effects
 EFST_EDP Enchant Deadly Poison
-EFST_TRUESIGHT Falcon Eyes
+EFST_TRUESIGHT True Sight
 EFST_WINDWALK Wind Walker
 EFST_MELTDOWN Shattering Strike
 EFST_CARTBOOST Cart Boost

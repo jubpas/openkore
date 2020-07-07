@@ -354,14 +354,10 @@ ve_in02.rsw#Inside Veins#
 ve_fild01.rsw#Veins Field#
 ve_fild02.rsw#Veins Field#
 ve_fild03.rsw#Veins Field#
-ve_fild03_a.rsw#Veins Field#
-ve_fild03_b.rsw#Veins Field#
 ve_fild04.rsw#Veins Field#
 ve_fild05.rsw#Veins Field#
 ve_fild06.rsw#Veins Field#
 ve_fild07.rsw#Veins Field#
-ve_fild07_a.rsw#Veins Field#
-ve_fild07_b.rsw#Veins Field#
 thor_camp.rsw#Thor Volcano Camp#
 que_thor.rsw#Thor Volcano Dungeon#
 thor_v01.rsw#Thor Volcano Dungeon 1F#

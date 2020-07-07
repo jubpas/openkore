@@ -206,7 +206,7 @@ CR_DEFENDER#Defending Aura#
 CR_SPEARQUICKEN#Spear Quicken#
 MO_IRONHAND#Iron Fists#
 MO_SPIRITSRECOVERY#Spiritual Cadence#
-MO_CALLSPIRITS#Vigor Condensation#
+MO_CALLSPIRITS#Summon Spirit Sphere#
 MO_ABSORBSPIRITS#Spiritual Sphere Absorption#
 MO_TRIPLEATTACK#Raging Trifecta Blow#
 MO_BODYRELOCATION#Snap#
@@ -217,8 +217,8 @@ MO_STEELBODY#Mental Strength#
 MO_BLADESTOP#Root#
 MO_EXPLOSIONSPIRITS#Fury#
 MO_EXTREMITYFIST#Guillotine Fist#
-MO_CHAINCOMBO#Chain Combo#
-MO_COMBOFINISH#Combo Finish#
+MO_CHAINCOMBO#Raging Quadruple Blow#
+MO_COMBOFINISH#Raging Thrust#
 SA_ADVANCEDBOOK#Study#
 SA_CASTCANCEL#Cast Cancel#
 SA_MAGICROD#Magic Rod#
