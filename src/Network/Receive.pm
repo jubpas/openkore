@@ -653,8 +653,8 @@ sub received_characters_unpackString {
 	for ($masterServer && $masterServer->{charBlockSize}) {
 		if ($_ == 155) {  # PACKETVER >= 20170830 [base and job exp are now uint64]
 			$char_info = {
-	            types => 'a4 a8 V a8 V6 v V2 v4 V v9 Z24 C8 v Z16 V4 C',
-				keys => [qw(charID exp zeny exp_job lv_job body_state health_state effect_state stance manner status_point hp hp_max sp sp_max walkspeed jobID hair_style weapon lv skill_point head_bottom shield head_top head_mid hair_pallete clothes_color name str agi vit int dex luk slot hair_color is_renamed last_map delete_date robe slot_addon rename_addon sex)],
+	            types => 'a4 V2 V V2 V6 v V2 v4 V v9 Z24 C8 v Z16 V4 C',
+				keys => [qw(charID exp exp_2 zeny exp_job exp_job_2 lv_job body_state health_state effect_state stance manner status_point hp hp_max sp sp_max walkspeed jobID hair_style weapon lv skill_point head_bottom shield head_top head_mid hair_pallete clothes_color name str agi vit int dex luk slot hair_color is_renamed last_map delete_date robe slot_addon rename_addon sex)],
 			};
 
 		} elsif ($_ == 147) { # PACKETVER >= 20141022 [iRO Doram Update, walk_speed is now long]
@@ -778,30 +778,32 @@ sub received_characters {
 	my $blockSize = $self->received_characters_blockSize();
 	my $char_info = $self->received_characters_unpackString;
 
+	# rAthena and Hercules send all pages
+	# Official Server send only pages with characters + 1 empty (tested bRO, iRO) Jul-2020
+	if(length($args->{charInfo} == 0)) {
+		$charSvrSet{sync_received_characters} = $charSvrSet{sync_Count} if(exists $charSvrSet{sync_received_characters});
+	} else {
+		$charSvrSet{sync_received_characters}++ if (exists $charSvrSet{sync_received_characters});
+	}
+
 	$net->setState(Network::CONNECTED_TO_LOGIN_SERVER) if $net->getState() != Network::CONNECTED_TO_LOGIN_SERVER;
 
 	return unless exists $args->{charInfo};
 
 	for (my $i = 0; $i < length($args->{charInfo}); $i += $masterServer->{charBlockSize}) {
 		my $character = new Actor::You;
-		@{$character}{@{$char_info->{keys}}} = unpack($char_info->{types}, substr($args->{charInfo}, $i, $masterServer->{charBlockSize}));
-		if ($masterServer->{charBlockSize} >= 155) {
-			$character->{RAW_exp} = $character->{exp};
-			$character->{RAW_exp_job} = $character->{exp_job};
-		}
-		$character->{ID} = $accountID;
-
-		$character->{name} = bytesToString($character->{name});
 
 		# Re-use existing $char object instead of re-creating it.
 		# Required because existing AI sequences (eg, route) keep a reference to $char.
 		if ($char && $char->{ID} eq $accountID && $char->{charID} eq $character->{charID}) {
 			$character = $char;
-			if ($masterServer->{charBlockSize} >= 155) {
-				$character->{exp} = $character->{RAW_exp};
-				$character->{exp_job} = $character->{RAW_exp_job};
-			}
 		}
+
+		@{$character}{@{$char_info->{keys}}} = unpack($char_info->{types}, substr($args->{charInfo}, $i, $masterServer->{charBlockSize}));
+
+		$character->{ID} = $accountID;
+
+		$character->{name} = bytesToString($character->{name});
 
 		$character->{lastJobLvl} = $character->{lv_job}; # This is for counting exp
 		$character->{lastBaseLvl} = $character->{lv}; # This is for counting exp
@@ -811,11 +813,6 @@ sub received_characters {
 
 		$character->{nameID} = unpack("V", $character->{ID});
 		$character->{last_map} =~ s/\.gat.*//g if ($character->{last_map});
-
-		if ($masterServer->{charBlockSize} >= 155) {
-			$character->{exp} = hex (unpack("H*",scalar reverse($character->{exp})));
-			$character->{exp_job} = hex (unpack("H*",scalar reverse($character->{exp_job})));
-		}
 
 		if ((!exists($character->{sex})) || ($character->{sex} ne "0" && $character->{sex} ne "1")) { $character->{sex} = $accountSex2; }
 
@@ -855,6 +852,7 @@ sub sync_received_characters {
 	return unless (UNIVERSAL::isa($net, 'Network::DirectConnection'));
 
 	$charSvrSet{sync_Count} = $args->{sync_Count} if (exists $args->{sync_Count});
+	$charSvrSet{sync_received_characters} = 0 if (exists $args->{sync_Count});
 
 	unless ($net->clientAlive) {
 		for (1..$args->{sync_Count}) {
@@ -986,8 +984,7 @@ sub parse_account_server_info {
 			types => 'a4 v Z20 v3 a132',
 			keys => [qw(ip port name state users property ip_port)],
 		};
-
-	}elsif ($args->{switch} eq '0AC4') { # kRO Zero 2017, kRO ST 201703+
+	} elsif ($args->{switch} eq '0AC4') { # kRO Zero 2017, kRO ST 201703+
 		$server_info = {
 			len => 160,
 			types => 'a4 v Z20 v3 a128',
@@ -1043,7 +1040,14 @@ sub reconstruct_account_server_info {
 
 	my $serverInfo;
 
-	if ($args->{switch} eq "0AC4" || $self->{packet_lut}{$args->{switch}} eq "0AC4") {
+	if ($args->{switch} eq '0B60') { # tRO 2020
+		$serverInfo = {
+			len => 164,
+			types => 'a4 v Z20 v3 a132',
+			keys => [qw(ip port name state users property ip_port)],
+		};
+
+	} elsif ($args->{switch} eq "0AC4" || $self->{packet_lut}{$args->{switch}} eq "0AC4") {
 		$serverInfo = {
 			len => 160,
 			types => 'a4 v Z20 v3 a128',
@@ -1913,7 +1917,12 @@ sub actor_display {
 			if ($monsters_lut{$args->{type}}) {
 				$actor->setName($monsters_lut{$args->{type}});
 			}
-			#$actor->{name_given} = exists $args->{name} ? bytesToString($args->{name}) : "Unknown";
+			# New actor_display packets include the Monster name
+			if ($args->{switch} eq "0086") {
+				$actor->{name} = $args->{name};
+			} else {
+				$actor->{name} = bytesToString($args->{name}) if exists $args->{name};
+			}
 			$actor->{name_given} = "Unknown";
 			$actor->{binType} = $args->{type};
 			$mustAdd = 1;
@@ -2323,6 +2332,11 @@ sub actor_died_or_disappeared {
 				delete $venderLists{$ID};
 			}
 
+			if (grep { $ID eq $_ } @buyerListsID) {
+				binRemove(\@buyerListsID, $ID);
+				delete $buyerLists{$ID};
+			}
+
 			$player->{gone_time} = time;
 			$players_old{$ID} = $player->deepCopy();
 			Plugins::callHook('player_disappeared', {player => $player});
@@ -2452,6 +2466,7 @@ sub actor_action {
 			if ($config{sitAuto_idle}) {
 				$timeout{ai_sit_idle}{time} = time;
 			}
+			delete $ai_v{sitAuto_forcedBySitCommand} if $ai_v{sitAuto_forcedBySitCommand};
 			$char->{sitting} = 0;
 		} else {
 			message TF("%s is standing.\n", getActorName($args->{sourceID})), 'parseMsg_statuslook', 2;
@@ -3487,10 +3502,12 @@ sub inventory_item_added {
 		$args->{item} = $item;
 
 		# TODO: move this stuff to AI()
-		if (grep {$_ eq $item->{nameID}} @{$ai_v{npc_talk}{itemsIDlist}}, $ai_v{npc_talk}{itemID}) {
+		if(defined($ai_v{npc_talk})) { # avoid autovivification
+			if (grep {$_ eq $item->{nameID}} @{$ai_v{npc_talk}{itemsIDlist}}, $ai_v{npc_talk}{itemID}) {
 
-			$ai_v{'npc_talk'}{'talk'} = 'buy';
-			$ai_v{'npc_talk'}{'time'} = time;
+				$ai_v{'npc_talk'}{'talk'} = 'buy';
+				$ai_v{'npc_talk'}{'time'} = time;
+			}
 		}
 
 		if (AI::state == AI::AUTO) {
@@ -3894,6 +3911,10 @@ sub login_pin_code_request {
 		return;
 	}
 
+	# tRO "workaround"
+	# receive pincode means that we already received all character pages
+	$charSvrSet{sync_received_characters} = $charSvrSet{sync_Count} if(exists $charSvrSet{sync_received_characters} && !$masterServer->{private});
+
 	# flags:
 	# 0 - correct
 	# 1 - requested (already defined)
@@ -3903,13 +3924,8 @@ sub login_pin_code_request {
 	# 7 - disabled?
 	# 8 - incorrect
 	if ($args->{flag} == 0) { # removed check for seed 0, eA/rA/brA sends a normal seed.
+		$timeout{'char_login_pause'}{'time'} = time;
 		message T("PIN code is correct.\n"), "success";
-		# call charSelectScreen
-		if (charSelectScreen(1) == 1) {
-			$firstLoginMap = 1;
-			$startingzeny = $chars[$config{'char'}]{'zeny'} unless defined $startingzeny;
-			$sentWelcomeMessage = 1;
-		}
 	} elsif ($args->{flag} == 1) {
 		# PIN code query request.
 		$accountID = $args->{accountID};
@@ -3951,11 +3967,7 @@ sub login_pin_code_request {
 
 		# call charSelectScreen
 		$self->{lockCharScreen} = 0;
-		if (charSelectScreen(1) == 1) {
-			$firstLoginMap = 1;
-			$startingzeny = $chars[$config{'char'}]{'zeny'} unless defined $startingzeny;
-			$sentWelcomeMessage = 1;
-		}
+		$timeout{'char_login_pause'}{'time'} = time;
 	} elsif ($args->{flag} == 8) {
 		# PIN code incorrect.
 		error T("PIN code is incorrect.\n");
@@ -7582,20 +7594,6 @@ sub flag {
 	my ($self, $args) = @_;
 }
 
-sub parse_stat_info {
-	my ($self, $args) = @_;
-	if($args->{switch} eq "0ACB") {
-		$args->{val} = hex (unpack("H*",scalar reverse($args->{val})));
-	}
-}
-
-sub parse_exp {
-	my ($self, $args) = @_;
-	if($args->{switch} eq "0ACC") {
-		$args->{val} = hex (unpack("H*",scalar reverse($args->{val})));
-	}
-}
-
 sub offline_clone_found {
 	my ($self, $args) = @_;
 
@@ -8259,6 +8257,7 @@ sub rodex_read_mail {
 sub unread_rodex {
 	my ( $self, $args ) = @_;
 	message T("You have new unread rodex mails.\n");
+	Plugins::callHook('rodex_unread_mail');
 }
 
 sub rodex_remove_item {
@@ -8866,14 +8865,31 @@ sub skill_msg {
 	}
 }
 
-sub msg_string {
+# Display msgstringtable.txt string and fill in a valid for %d format (ZC_MSG_VALUE).
+# 07E2 <message>.W <value>.L
+# Displays msgstringtable.txt string in a color. (ZC_MSG_COLOR).
+# 09CD <msg id>.W <color>.L
+sub message_string {
 	my ($self, $args) = @_;
 
-	if ($msgTable[++$args->{index}]) { # show message from msgstringtable.txt
-		message "$msgTable[$args->{index}]. Value: $args->{paral}\n", "info";
+	my $index = ++$args->{index};
+
+	if ($msgTable[$index]) { # show message from msgstringtable.txt
+		if($args->{param} && $args->{switch} eq '07E2') {
+			warning sprintf($msgTable[$index], $args->{param})."\n";
+		} else {
+			warning "$msgTable[$index]\n";
+		}
 	} else {
-		warning TF("Unknown msgid:%d paral:%d. Need to update the file msgstringtable.txt (from data.grf)\n", $args->{index}, $args->{paral});
+		warning TF("Unknown message_string: %s param: %s. Need to update the file msgstringtable.txt (from data.grf)\n", $index, $args->{param});
 	}
+
+	$self->mercenary_off() if ($index >= 1267 && $index <= 1270);
+
+	Plugins::callHook('packet_message_string', {
+		index => $index,
+		val => $args->{param}
+	});
 }
 
 # TODO: use $args->{type} if present
@@ -10433,18 +10449,6 @@ sub mercenary_off {
 	delete $char->{mercenary};
 }
 # -message_string
-
-# not only for mercenaries, this is an all purpose packet !
-sub message_string {
-	my ($self, $args) = @_;
-
-	if ($msgTable[++$args->{msg_id}]) { # show message from msgstringtable.txt
-		warning "$msgTable[$args->{msg_id}]\n";
-		$self->mercenary_off() if ($args->{msg_id} >= 1267 && $args->{msg_id} <= 1270);
-	} else {
-		warning TF("Unknown message_string: %s. Need to update the file msgstringtable.txt (from data.grf)\n", $args->{msg_id});
-	}
-}
 
 sub monster_ranged_attack {
 	my ($self, $args) = @_;

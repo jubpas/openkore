@@ -193,7 +193,7 @@ sub initHandlers {
 		['doridori', T("Does a doridori head turn."), \&cmdDoriDori],
 		['drop', [
 			T("Drop an item from the inventory."),
-			[T("<inventory item #> [<amount>]"), T("drop an item from inventory")]
+			[T("<inventory_item_list> [<amount>]"), T("drop an item from inventory")]
 			], \&cmdDrop],
 		['dump', T("Dump the current packet receive buffer and quit."), \&cmdDump],
 		['dumpnow', T("Dump the current packet receive buffer without quitting."), \&cmdDumpNow],
@@ -479,7 +479,9 @@ sub initHandlers {
 			], \&cmdRelog],
 		['repair', [
 			T("Repair player's items."),
+			["", T("list of items available for repair")],
 			[T("<item #>"), T("repair the specified player's item")],
+			[T("cancel"), T("cancel repair item")],
 			], \&cmdRepair],
 		['respawn', T("Respawn back to the save point."), \&cmdRespawn],
 		['revive', [
@@ -2329,11 +2331,12 @@ sub cmdDrop {
 		return;
 	}
 	my (undef, $args) = @_;
-	my ($arg1) = $args =~ /^([\d,-]+)/;
+	my ($arg1) = $args =~ /^(\d+[\d,-]*)/;
 	my ($arg2) = $args =~ /^[\d,-]+ (\d+)$/;
-	if (($arg1 eq "") or ($arg1 < 0)) {
+
+	if ($arg1 eq "") {
 		error T("Syntax Error in function 'drop' (Drop Inventory Item)\n" .
-			"Usage: drop <item #> [<amount>]\n");
+			"Usage: drop <inventory_item_list> [<amount>]\n");
 	} else {
 		my @temp = split(/,/, $arg1);
 		@temp = grep(!/^$/, @temp); # Remove empty entries
@@ -4977,18 +4980,42 @@ sub cmdRepair {
 		error TF("You must be logged in the game to use this command '%s'\n", shift);
 		return;
 	}
-	my (undef, $listID) = @_;
-	if ($listID =~ /^\d+$/) {
-		if ($repairList->[$listID]) {
-			my $name = itemNameSimple($repairList->[$listID]{nameID});
-			message TF("Attempting to repair item: %s\n", $name);
-			$messageSender->sendRepairItem($repairList->[$listID]);
-		} else {
-			error TF("Item with index: %s does either not exist in the 'Repair List' or the list is empty.\n", $listID);
+	my (undef, $binID) = @_;
+	if (!$repairList) {
+		error T("'Repair List' is empty.\n");
+
+	} elsif ($binID eq "") {
+		my $msg = center(T(" Repair List "), 80, '-') ."\n".
+			T("   # Short name                     Full name\n");
+		for (my $i = 0; $i < @{$repairList}; $i++) {
+			next if ($repairList->[$i] eq "");
+			my $shortName = itemNameSimple($repairList->[$i]{nameID});
+			$msg .= sprintf("%4d %-30s %s\n", $i, $shortName, $repairList->[$i]->{name});
 		}
+		$msg .= ('-'x80) . "\n";
+		message $msg, "list";
+
+	} elsif ($binID =~ /^\d+$/) {
+		if ($repairList->[$binID]) {
+			my $shortName = itemNameSimple($repairList->[$binID]{nameID});
+			message TF("Attempting to repair item: %s (%d)\n", $shortName, $binID);
+			$messageSender->sendRepairItem($repairList->[$binID]);
+		} else {
+			error TF("Item with index: %s does either not exist in the 'Repair List'.\n", $binID);
+		}
+
+	} elsif ($binID eq "cancel") {
+		message T("Cancel repair item.\n");
+		my %cancel = (
+			index => 65535, # 0xFFFF
+		);
+		$messageSender->sendRepairItem(\%cancel);
+
 	} else {
-		error T("Syntax Error in function 'repair' (Repair player's items.)\n" .
-			"Usage: repair [Repair List index]\n");
+		error T("Syntax Error in function 'repair' (Repair player's items)\n" .
+			"Usage: repair\n" .
+			"       repair <item #>\n" .
+			"       repair cancel\n");
 	}
 }
 
@@ -6181,6 +6208,14 @@ sub cmdUseSkill {
 	}
 
 	$skill = new Skill(auto => $args[0], level => $level);
+
+	if ($char->{skills}{$skill->getHandle()}{lv} == 0) {
+		error TF("Skill '%s' cannot be used because you have no such skill.\n", $skill->getName());
+		return;
+	} elsif ($char->{skills}{$skill->getHandle()}{lv} < $level) {
+		error TF("You are trying to use the skill '%s' level %d, but only level %d is available to you.\n", $skill->getName(), $level, $char->{skills}{$skill->getHandle()}{lv});
+		return;
+	}
 
 	require Task::UseSkill;
 	my $skillTask = new Task::UseSkill(
